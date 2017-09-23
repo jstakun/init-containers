@@ -5,7 +5,7 @@ if [ -z ${CONF+x} ]; then
   echo "CONF is unset. Nothing will be downloaded. I'll copy files from /src";
   cp -v -R /src/* /dest/ 
 else 
-  wget $CONF;
+  curl -O $CONF;
   tar -xjvf -C /dest/ *.tar.gz
 fi
  
