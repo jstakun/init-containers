@@ -1,13 +1,11 @@
 FROM rhel7
-RUN mkdir /work && mkdir /src && mkdir /dest
+RUN mkdir -p /work/bin && mkdir /src && mkdir /dest
 
-COPY ./work/ /work/
+COPY ./bin/ /work/bin/
 COPY ./src /src/
 
-ENV PREFIX OCP_
-ENV CONF https://github.com/jstakun/init-containers/raw/master/conf.tar.gz
-ENV OCP_TEST test
-ENV OCP_MASTER_1 master_1
-ENV OCP_MASTER_2 master_2
+ENV PREFIX=OCP_\
+    CONF=https://raw.githubusercontent.com/jstakun/init-containers/master/conf.tar.gz\
+    OCP_TEST=test OCP_MASTER_1=master_1 OCP_MASTER_2=master_2
 
-ENTRYPOINT ["/work/run.sh"]
+ENTRYPOINT ["/work/bin/run.sh"]
