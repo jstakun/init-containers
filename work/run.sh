@@ -1,8 +1,14 @@
 #!/bin/sh
-echo "Started";
+echo "Starting...";
 
-cp -v -R /src/* /dest/
-
+if [ -z ${CONF+x} ]; then
+  echo "CONF is unset. Nothing will be downloaded. I'll copy files from /src";
+  cp -v -R /src/* /dest/ 
+else 
+  wget $CONF;
+  tar -xjvf -C /dest/ *.tar.gz
+fi
+ 
 if [ -z ${PREFIX+x} ]; then 
   echo "PREFIX is unset. Please set PREFIX and retry"; 
 else
@@ -23,4 +29,4 @@ echo $(cat /dest/conf/test1.txt);
 
 echo $(cat /dest/conf/test2.txt);
 
-echo "Done";
+echo "Done!";
